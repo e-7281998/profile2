@@ -59,9 +59,53 @@ window.addEventListener('scroll', function () {
     var top = doc.scrollTop;    //스크롤 값 계산
     header[0].offsetHeight < top ? header[0].style = 'box-shadow: 0 1px 10px 7px #eee;' : header[0].style = 'box-shadow: none;';
     for (var i = 0; i < sectionHeight.length; i++) {
-        sectionHeight[i] - (sectionHeight[i] / 4) < top ? body[0].style.background = bodyColor[i] : '';
+        if (sectionHeight[i] - (sectionHeight[i] / 4) <= top) {
+            body[0].style.background = bodyColor[i];
+            //menuList 글자 색 바꿔주기
+            for (var j = 0; j < menuLi.length; j++) {
+                i === j ? menuLi[j].children[0].style = `color: ${bodyColor[i]}` : menuLi[j].children[0].style = 'color: lightgrey';
+            }
+        }
     }
-    console.log(top);
 });
+// console.log(menuLi[0].children[0].style)
 
+const skillList = [
+    {
+        no: 1,
+        skill: 'HTML5',
+        level: ['시맨틱 태그를 사용할 수 있습니다.']
+    }, {
+        no: 2,
+        skill: 'CSS',
+        level: ['Flex를 사용할 수 있습니다.']
+    }, {
+        no: 3,
+        skill: 'JavaScript',
+        level: ['ES6 문법을 사용할 수 있습니다.']
+    }, {
+        no: 4,
+        skill: 'React',
+        level: ['Hook을 사용할 수 있습니다.', 'React-router-dom을 사용할 수 있습니다.', 'API를 사용할 수 있습니다.']
+    }
+];
+// console.log(skillList, skillList[0].skill, skillList[0].level.length);
 
+const skill = document.getElementById('skill');
+skillList.map((n) => {
+    // console.log(n);
+    const ul = document.createElement('ul');
+    const li = document.createElement('li');
+    const title = document.createElement('p');
+    const levelUl = document.createElement('ul');
+    n.level.map((l) => {
+        const levelLi = document.createElement('li');
+        levelLi.innerText = l;
+        levelUl.append(levelLi);
+    });
+    title.innerText = n.skill;
+    li.append(title, levelUl);
+    // li.append(levelUl);
+    ul.append(li);
+    skill.append(ul);
+});
