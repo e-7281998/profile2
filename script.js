@@ -59,7 +59,8 @@ window.addEventListener('scroll', function () {
     var top = doc.scrollTop;    //스크롤 값 계산
     header[0].offsetHeight < top ? header[0].style = 'box-shadow: 0 1px 10px 7px #eee;' : header[0].style = 'box-shadow: none;';
     for (var i = 0; i < sectionHeight.length; i++) {
-        if (sectionHeight[i] - (sectionHeight[i] / 4) <= top) {
+        // if (sectionHeight[i] - (sectionHeight[i] / 4) <= top) {
+        if (sectionHeight[i] * 0.9 <= top) {
             body[0].style.background = bodyColor[i];
             //menuList 글자 색 바꿔주기
             for (var j = 0; j < menuLi.length; j++) {
@@ -67,36 +68,38 @@ window.addEventListener('scroll', function () {
             }
         }
     }
+    if (sectionHeight[1] * 0.9 <= top) skillUp();
 });
-// console.log(menuLi[0].children[0].style)
 
 const skillList = [
     {
         no: 1,
         skill: 'HTML5',
+        color: '#ff5722',
         level: ['시맨틱 태그를 사용할 수 있습니다.']
     }, {
         no: 2,
         skill: 'CSS',
+        color: '#0091ea',
         level: ['Flex를 사용할 수 있습니다.']
     }, {
         no: 3,
         skill: 'JavaScript',
+        color: '#ffca28',
         level: ['ES6 문법을 사용할 수 있습니다.']
     }, {
         no: 4,
         skill: 'React',
+        color: '#90caf9',
         level: ['Hook을 사용할 수 있습니다.', 'React-router-dom을 사용할 수 있습니다.', 'API를 사용할 수 있습니다.']
     }
 ];
-// console.log(skillList, skillList[0].skill, skillList[0].level.length);
-
+//skill만들기
 const skill = document.getElementById('skill');
 skillList.map((n) => {
-    // console.log(n);
-    const ul = document.createElement('ul');
-    const li = document.createElement('li');
+    const div = document.createElement('div');
     const title = document.createElement('p');
+    title.style.backgroundColor = n.color;
     const levelUl = document.createElement('ul');
     n.level.map((l) => {
         const levelLi = document.createElement('li');
@@ -104,8 +107,16 @@ skillList.map((n) => {
         levelUl.append(levelLi);
     });
     title.innerText = n.skill;
-    li.append(title, levelUl);
-    // li.append(levelUl);
-    ul.append(li);
-    skill.append(ul);
+    div.append(title, levelUl);
+    skill.append(div);
 });
+//skill 보여주기
+function skillUp() {
+    var i = 0
+    const skillUpInterval = setInterval(function () {
+        skill.children[i].style = 'opacity: 1; top:0; transition: all .6s ease-in;';
+        i++;
+        if (i == skillList.length) clearInterval(skillUpInterval);
+    }, 300);
+
+}
