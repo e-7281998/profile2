@@ -10,7 +10,8 @@ for (var i = 0; i < menuData.length; i++) {
     const li = document.createElement('li');
     const a = document.createElement('a');
     // a.setAttribute('onclick', 'moveSection(this)');
-    a.setAttribute('href', '#');
+    // a.setAttribute('href', '#');
+    a.setAttribute('href', '#' + menuData[i]);
     // a.setAttribute('name', menuData[i]);
     // a.setAttribute('id', '#' + menuData[i])
     a.innerText = menuData[i];
@@ -53,6 +54,7 @@ const sectionHeight = [];   //section 높이 담음
 //section높이 정식으로 정해지면 수정하기
 for (var i = 0; i < section.length; i++) {
     sectionHeight[i] = section[i].offsetHeight * i;
+    section[i].style.paddingTop = (header[0].offsetHeight + 50) / 16 + 'rem';
 }
 
 const doc = document.documentElement;   //문서자체를 가져옴
@@ -72,6 +74,7 @@ window.addEventListener('scroll', function () {
         }
     }
     if (sectionHeight[1] * 0.9 <= top) skillUp();
+    if (sectionHeight[2] * 0.9 <= top) projectUp();
 });
 
 const skillList = [
@@ -217,3 +220,16 @@ project.map((l) => {
     li.append(projectImg, linkDiv, exUl, addUl, skillUl);
     projectUl.append(li);
 });
+
+
+function projectUp() {
+    var i = 0
+    var ulListWidth;
+    doc.offsetWidth <= 500 ? ulListWidth = '100%' : ulListWidth = projectUl.offsetWidth / 2.5 + 'px'
+    const projectUpInterval = setInterval(function () {
+        projectUl.children[i].style = 'opacity: 1; top:0; transition: all .6s ease-in; width:' + ulListWidth;
+        i++;
+        if (i == project.length) clearInterval(projectUpInterval);
+    }, 300);
+
+}
