@@ -9,7 +9,10 @@ var menuDataWidth = 0;
 for (var i = 0; i < menuData.length; i++) {
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.setAttribute('href', '#' + menuData[i]);
+    // a.setAttribute('onclick', 'moveSection(this)');
+    a.setAttribute('href', '#');
+    // a.setAttribute('name', menuData[i]);
+    // a.setAttribute('id', '#' + menuData[i])
     a.innerText = menuData[i];
     li.append(a);
     menu.append(li);
@@ -38,7 +41,7 @@ function introduce() {
         // introduceMent[j].classList.remove('show');
         i++;
         if (i === introduceMent.length) i = 0;
-    }, 1500);
+    }, 500);
 }
 introduce();
 
@@ -120,3 +123,97 @@ function skillUp() {
     }, 300);
 
 }
+
+const project = [
+    {
+        title: '고양이 가라사대',
+        imgLink: './img/고양이가라사대.png',
+        linkSite: 'https://e-7281998.github.io/cat-jjal-maker',
+        linkCode: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
+        ex: [
+            '영어 문구를 입력하면, 영어 문구가 작성된 고양이 사진을 랜덤으로 받아옵니다.',
+            '사진위 하트를 클릭하면 로컬스토리지에 고양이 사진이 저장됩니다.',
+            '(진유림 - 만들면서 배우는 리액트 강의를 수강하며 만들었습니다.)'
+        ],
+        add: [
+            '사진 저장 시 고양이 소리 랜덤으로 발생',
+            '사진 중복 저장 방지',
+            '저장된 사진 띄우기, 삭제'
+        ],
+        skill: [
+            'HTML', 'CSS', 'JavaScript', 'React'
+        ]
+    },
+    {
+        title: '영화 정보 사이트',
+        imgLink: './img/영화정보.png',
+        linkSite: 'https://e-7281998.github.io/movie',
+        linkCode: 'https://github.com/e-7281998/movie/tree/main/src',
+        ex: [
+            'API로 영화 정보를 받옵니다.',
+            '(노마드 코더 - 리액트로 영화 웹 서비스 만들기 강의를 수강하며 만들었습니다.'
+        ],
+        add: [
+            '영화 제목 클릭시 영화와 관련한 정보 보기를 SPA로 보여주기',
+            '뒤로가기 버튼 추가',
+            '마우스 오버 시 영화 줄거리 보이기'
+        ],
+        skill: [
+            'HTML', 'CSS', 'JavaScript', 'React'
+        ]
+    }
+]
+const projectUl = document.querySelector('#project ul');
+project.map((l) => {
+    const li = document.createElement('li'),
+        projectTitle = document.createElement('p'),
+        projectImg = document.createElement('img'),
+        linkDiv = document.createElement('div'),
+        linkSite = document.createElement('a'),
+        linkCode = document.createElement('a'),
+        exUl = document.createElement('ul'),
+        exTitle = document.createElement('p'),
+        addUl = document.createElement('ul'),
+        addTitle = document.createElement('p'),
+        // skillTitle = document.createElement('p'),
+        skillUl = document.createElement('ul'),
+        skillTitle = document.createElement('p');
+
+    skillUl.setAttribute('class', 'useSkill')
+    exTitle.innerText = '기본 정보';
+    addTitle.innerText = '강의 수강 후 추가';
+    skillTitle.innerText = '사용 스킬';
+    // skillTitle.innerText = '사용 기술'
+
+    addUl.append(addTitle);
+    exUl.append(exTitle);
+    skillUl.append(skillTitle);
+    l.ex.map((exl) => {
+        var exLi = document.createElement('li');
+        exLi.innerText = '📌' + exl;
+        exUl.append(exLi);
+    });
+    l.add.map((addl) => {
+        var addLi = document.createElement('li');
+        addLi.innerText = '✖️' + addl;
+        addUl.append(addLi);
+    });
+    l.skill.map((skilll) => {
+        var skillLi = document.createElement('li');
+        skillLi.innerText = skilll;
+        skillUl.append(skillLi);
+    });
+
+    projectTitle.innerText = l.title;
+    linkSite.setAttribute('href', l.linkSite);
+    linkSite.setAttribute('target', '_blank');
+    linkSite.innerText = '🔎' + 'SITE'
+    linkCode.setAttribute('href', l.linkCode);
+    linkCode.setAttribute('target', '_blank');
+    linkCode.innerText = '🔎' + 'CODE'
+    projectImg.setAttribute('src', l.imgLink);
+    linkDiv.append(linkSite, linkCode);
+    li.append(projectTitle);
+    li.append(projectImg, linkDiv, exUl, addUl, skillUl);
+    projectUl.append(li);
+});
