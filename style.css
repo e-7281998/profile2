@@ -9,6 +9,7 @@ ul {
 }
 
 body {
+    width: 100%;
     background: #CDF0EA;
     transition: all .3s ease-in-out;
 }
@@ -26,6 +27,7 @@ header {
     padding: 0 3rem;
     background: white;
     display: flex;
+    flex-wrap: wrap;
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
