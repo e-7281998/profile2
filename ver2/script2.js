@@ -4,13 +4,16 @@ const querySel = ((el) => document.querySelector(el));
 const classRemove = (tag, value) => { tag.classList.remove(value); }
 const classAdd = (tag, value) => { tag.classList.add(value); }
 const setId = (tag, value) => { tag.setAttribute("id", value) };
+const setHeight = (tag) => { tag.style = "min-height:" + window.innerHeight + "px" };
 
 const header = querySel("header");
+setHeight(header);
+
 const main = querySel("main");
 
 const navList = ["HOME", "SKILL", "PROJECT"];
+const nav = createEl("nav");
 function Nav() {
-    const nav = createEl("nav");
     const ul = createEl("ul");
 
     navList.map((txt) => {
@@ -64,7 +67,7 @@ const skillList = [
     {
         name: 'CSS',
         img: './img/css.png',
-        desc: ['flex 사용'],
+        desc: ['flex 사용', 'animation 사용'],
     },
     {
         name: 'JavaScript',
@@ -77,24 +80,43 @@ const skillList = [
     },
 ]
 
-
+const sectionSkill = createEl("section");
+setHeight(sectionSkill);
 function Skill() {
-    const section = createEl("section");
-    setId(section, navList[1]);
+    setId(sectionSkill, navList[1]);
     skillList.map((skill) => {
         const div = createEl("div");
         const img = createEl("img");
         img.setAttribute("src", skill.img);
         img.setAttribute("alt", skill.name);
-        const ul = createEl("ul")
+        const ul = createEl("ul");
+        const p = createEl("p");
+        p.innerText = skill.name;
         skill.desc?.map((desc) => {
             const li = createEl("li");
             li.innerText = desc;
             ul.append(li);
         })
-        div.append(img, ul);
-        section.append(div);
+        div.append(img, p, ul);
+        sectionSkill.append(div);
     })
-    main.append(section);
+    main.append(sectionSkill);
 }
 Skill();
+
+
+var prevScroll = 0;
+window.addEventListener("scroll", () => {
+    const current = window.scrollY;
+    if (current > prevScroll) {
+        classAdd(nav, "hide");
+    } else {
+        classRemove(nav, "hide");
+    }
+    prevScroll = current;
+});
+
+
+window.onresize = () => {
+    setHeight(header);
+}
