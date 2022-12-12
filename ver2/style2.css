@@ -1,0 +1,12 @@
+.dis_b {
+    display: block;
+}
+
+.dis_n {
+    display: none;
+}
+
+#SKILL img {
+    width: 100px;
+    height: 100px;
+}
