@@ -7,8 +7,6 @@ const setId = (tag, value) => { tag.setAttribute("id", value) };
 const setHeight = (tag) => { tag.style = "min-height:" + window.innerHeight + "px" };
 
 const header = querySel("header");
-setHeight(header);
-
 const main = querySel("main");
 
 const navList = ["HOME", "SKILL", "PROJECT"];
@@ -48,6 +46,18 @@ function Intro() {
 }
 Intro();
 
+function headerHeight() {
+    var fsHeight = document.defaultView.getComputedStyle(h1).getPropertyValue("font-size");
+    fsHeight = fsHeight.replace('px', '');
+    fsHeight *= 3;
+    if (window.innerHeight > fsHeight) {
+        setHeight(header);
+    } else {
+        header.style.height = fsHeight + 'px';
+    }
+}
+headerHeight();
+
 const stopIntroBtn = createEl("button");
 stopIntroBtn.innerText = "REPLAY";
 classAdd(stopIntroBtn, "dis_n");
@@ -67,7 +77,7 @@ const skillList = [
     {
         name: 'CSS',
         img: './img/css.png',
-        desc: ['flex 사용', 'animation 사용'],
+        desc: ['flex 사용', 'animation 사용', 'flex 사용', 'flex 사용', 'flex 사용',],
     },
     {
         name: 'JavaScript',
@@ -81,26 +91,52 @@ const skillList = [
 ]
 
 const sectionSkill = createEl("section");
-setHeight(sectionSkill);
+
 function Skill() {
+    const h2 = createEl("h2");
     setId(sectionSkill, navList[1]);
+    h2.innerText = navList[1];
+    const titUl = createEl("ul");
     skillList.map((skill) => {
-        const div = createEl("div");
+        const titLi = createEl("li");
+        const imgA = createEl("a");
         const img = createEl("img");
         img.setAttribute("src", skill.img);
         img.setAttribute("alt", skill.name);
-        const ul = createEl("ul");
-        const p = createEl("p");
-        p.innerText = skill.name;
-        skill.desc?.map((desc) => {
-            const li = createEl("li");
-            li.innerText = desc;
-            ul.append(li);
-        })
-        div.append(img, p, ul);
-        sectionSkill.append(div);
+        imgA.setAttribute("href", "#" + skill.name);
+
+        const subUl = createEl("ul");
+        skill.desc?.map((txt) => {
+            const subLi = createEl("li");
+            subLi.innerText = txt;
+            subUl.append(subLi);
+        });
+
+        imgA.append(img);
+        titLi.append(imgA, subUl);
+        titUl.append(titLi);
+
     })
+    sectionSkill.append(h2, titUl);
     main.append(sectionSkill);
+    skillHeight();
+
+}
+function skillHeight() {
+    const subul = document.querySelectorAll('#SKILL ul ul');
+    const h2 = querySel('h2');
+    const titul = document.querySelector('#SKILL ul');
+    var subulH = 0;
+    for (var i = 0; i < subul.length; i++) {
+        subulH = Math.max(subulH, subul[i].offsetHeight);
+    }
+    subulH += h2.offsetHeight + titul.offsetHeight + subulH;
+
+    if (window.innerHeight > subulH) {
+        setHeight(sectionSkill);
+    } else {
+        sectionSkill.style.height = subulH + 'px';
+    }
 }
 Skill();
 
@@ -118,5 +154,6 @@ window.addEventListener("scroll", () => {
 
 
 window.onresize = () => {
-    setHeight(header);
+    headerHeight();
+    skillHeight();
 }

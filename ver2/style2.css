@@ -109,153 +109,139 @@ header button:hover {
     cursor: pointer;
 }
 
-main {
-    /* background-color: #999; */
-}
+main {}
 
 section {}
 
 #SKILL {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#SKILL h3 {
-    width: 100%;
-}
-
-#SKILL div {
-    width: 45%;
-    /* width: 80%; */
     position: relative;
-    /* border: 3px solid #ccc; */
-    margin: 10px auto;
-    box-sizing: border-box;
 }
 
-@media screen and (max-width:700px) {
-    #SKILL div {
-        width: 80%;
-    }
+#SKILL h2 {
+    text-align: center;
 }
 
-#SKILL img {
+#SKILL>ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+#SKILL>ul li a {
+    display: block;
     width: 100px;
     height: 100px;
-    margin: auto 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#SKILL>ul>li a:hover img {
+    filter: grayscale(100%);
+    animation-name: grayOut;
+    animation-duration: .8s;
+    animation-fill-mode: forwards;
+}
+
+#SKILL>ul li a img {
+    width: 100%;
+    height: 100%;
+    animation-name: grayIn;
+    animation-duration: .8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes grayIn {
+    to {
+        filter: grayscale(100%);
+    }
+}
+
+@keyframes grayOut {
+    to {
+        filter: grayscale(0%);
+    }
+}
+
+#SKILL>ul ul {
+    list-style: none;
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     left: 0;
-    transform: translateY(-50%);
-    z-index: 2;
-    opacity: 1;
-    transition: all 1s ease-in-out;
-
-}
-
-#SKILL div:hover img {
-    left: 75%;
-    opacity: 0;
-    transition: all 1s ease-in-out;
-}
-
-#SKILL p {
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    font-weight: bold;
-    transform: translateY(-50%);
-    font-size: 30px;
-    animation-name: skTitleIn;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-}
-
-#SKILL div:hover p {
-    animation-name: skTitleOut;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes skTitleOut {
-    from {
-        left: 0;
-        width: 100%;
-        opacity: 1;
-    }
-
-    to {
-        left: 75%;
-        width: 0;
-        opacity: 0;
-    }
-}
-
-@keyframes skTitleIn {
-    from {
-        left: 75%;
-        width: 0;
-        opacity: 0;
-    }
-
-    to {
-        left: 0;
-        width: 100%;
-        opacity: 1;
-    }
-}
-
-#SKILL ul {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    list-style: none;
-    position: absolute;
-    /* width: 100%; */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
 }
 
-#SKILL ul li {
-    font-size: 18px;
-    display: block;
-    height: 100%;
-    padding: 5px 20px;
-    margin: 3px;
-    animation-name: skLiOut;
+#SKILL>ul ul li {
+    display: inline-block;
+    font-size: large;
+    margin: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: inset 0 -15px 0 lightgoldenrodyellow;
+}
+
+#SKILL>ul ul li:nth-child(2n-1) {
+    animation-name: skliOutR;
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
-#SKILL div:hover li {
-    animation-name: skLiIn;
+#SKILL>ul ul li:nth-child(2n) {
+    animation-name: skliOutL;
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
-@keyframes skLiIn {
-    0% {
+#SKILL>ul>li a:hover~ul li:nth-child(2n-1) {
+    animation-name: skliInL;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+#SKILL>ul>li a:hover~ul li:nth-child(2n) {
+    animation-name: skliInR;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes skliInL {
+    from {
+        padding-right: 100px;
         opacity: 0;
-        box-shadow: inset 0 -15px 0 transparent;
     }
 
-    100% {
+    to {
+        padding-right: 10px;
         opacity: 1;
-        box-shadow: inset 0 -15px 0 lightgoldenrodyellow;
     }
 }
 
-@keyframes skLiOut {
-    0% {
-        opacity: 1;
-        box-shadow: inset 0 -15px 0 lightgoldenrodyellow;
+@keyframes skliInR {
+    from {
+        padding-left: 100px;
+        opacity: 0;
     }
 
-    100% {
+    to {
+        padding-left: 10px;
+        opacity: 1;
+    }
+}
+
+@keyframes skliOutL {
+    to {
+        padding-right: 100px;
         opacity: 0;
-        box-shadow: inset 0 -15px 0 transparent;
+    }
+}
+
+@keyframes skliOutR {
+    to {
+        padding-left: 100px;
+        opacity: 0;
     }
 }
 
