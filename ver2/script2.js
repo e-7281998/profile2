@@ -9,6 +9,7 @@ const setHeight = (tag) => { tag.style = "min-height:" + window.innerHeight + "p
 const header = querySel("header");
 const main = querySel("main");
 
+//메뉴
 const navList = ["HOME", "SKILL", "PROJECT"];
 const nav = createEl("nav");
 function Nav() {
@@ -29,6 +30,7 @@ function Nav() {
 Nav();
 setId(header, navList[0]);
 
+//home 인사말
 const introTxt = "안녕하세요.\n신입 프론트엔드 개발자 전은정 입니다.\n방문해주셔서 감사합니다."
 var introTimer;
 const h1 = createEl("h1");
@@ -36,6 +38,7 @@ header.append(h1);
 function Intro() {
     var i = 0;
     introTimer = setInterval(() => {
+        //공백은 유니코드로 바꿔주기
         h1.innerText = h1.innerText + introTxt.charAt(i).replace(" ", '\u00a0');
         i++;
         if (introTxt.length === h1.innerText.length) {
@@ -46,6 +49,7 @@ function Intro() {
 }
 Intro();
 
+//hoem 높이
 function headerHeight() {
     var fsHeight = document.defaultView.getComputedStyle(h1).getPropertyValue("font-size");
     fsHeight = fsHeight.replace('px', '');
@@ -58,6 +62,7 @@ function headerHeight() {
 }
 headerHeight();
 
+//replay버튼
 const stopIntroBtn = createEl("button");
 stopIntroBtn.innerText = "REPLAY";
 classAdd(stopIntroBtn, "dis_n");
@@ -68,6 +73,7 @@ stopIntroBtn.onclick = () => {
 }
 header.append(stopIntroBtn);
 
+//skill
 const skillList = [
     {
         name: 'HTML',
@@ -91,7 +97,7 @@ const skillList = [
 ]
 
 const sectionSkill = createEl("section");
-
+//skill 만들기
 function Skill() {
     const h2 = createEl("h2");
     setId(sectionSkill, navList[1]);
@@ -122,6 +128,7 @@ function Skill() {
     skillHeight();
 
 }
+//skill 높이
 function skillHeight() {
     const subul = document.querySelectorAll('#SKILL ul ul');
     const h2 = querySel('h2');
@@ -140,9 +147,19 @@ function skillHeight() {
 }
 Skill();
 
+function Project() {
+    const h2 = createEl("h2");
+    setId(h2, navList[2]);
+    h2.innerText = 'project';
+    main.append(h2)
 
+}
+Project();
+
+//스크롤
 var prevScroll = 0;
 window.addEventListener("scroll", () => {
+    //위로 올리면 메뉴 보이기
     const current = window.scrollY;
     if (current > prevScroll) {
         classAdd(nav, "hide");
@@ -150,10 +167,57 @@ window.addEventListener("scroll", () => {
         classRemove(nav, "hide");
     }
     prevScroll = current;
+    changeBodyColor(current);
 });
 
+//배경 색
+const bodyColor = ['#CDF0EA', '#F7DBF0', '#BEAEE2'];
+function navListHInfo(elPHT, elMTH, n) {
+    return {
+        "num": n,
+        "elPHT": elPHT,
+        "elMTH": elMTH,
+    }
+}
+var navListH = [];  //높이계산 정보 담을 곳
+function getHeightColor() {
+    navList.map((el, n) => {
+        //elH-높이, elT-탑
+        const elH = document.getElementById(el).offsetHeight;
+        const elT = document.getElementById(el).offsetTop;
+        const elPHT = elH + elT;
+        const elMTH = elT - (elH / 3);
 
+        navListH.push(navListHInfo(elPHT, elMTH, n));
+    });
+}
+//body색 바꾸기
+function changeBodyColor(currentY) {
+    navListH.map((el) => {
+        if ((currentY >= el.elMTH) && (currentY < el.elPHT)) {
+            document.body.style = 'background-color:' + bodyColor[el.num];
+            changeNavColor(el.num);
+        }
+    })
+}
+//메뉴 색 바꾸기
+function changeNavColor(num) {
+    const navA = document.querySelectorAll('nav a');
+    for (var i = 0; i < navA.length; i++) {
+        if (i === num) {
+            navA[i].style.color = bodyColor[i];
+        } else {
+            navA[i].style.color = '#ccc';
+        }
+    }
+}
+getHeightColor();
+changeBodyColor(0); //초기에는 스크롤값 구하지 않으므로(스크롤 안움직임)
+
+
+//브라우저 창 조절시
 window.onresize = () => {
     headerHeight();
     skillHeight();
+    getHeightColor();
 }

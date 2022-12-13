@@ -15,10 +15,19 @@ img {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    color: #333;
+}
+
+@font-face {
+    font-family: 'Poor Story', 'cursive';
+}
+
+body {
+    transition: all .5s ease-in-out;
 }
 
 nav {
-    /* background-color: #ccc; */
+    background-color: white;
     position: fixed;
     width: 100%;
     top: 0;
@@ -36,7 +45,6 @@ nav.hide {
 
 nav ul {
     display: flex;
-    background-color: orange;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -52,18 +60,22 @@ nav a {
     width: 100%;
     padding: 10px;
     text-decoration: none;
+    font-family: 'Poor Story';
+    font-size: larger;
+    font-weight: bolder;
 }
 
 nav a:hover {
-    transition: all .3s ease-in-out;
-    background-color: red;
+    /* background-color: red; */
+    /* color: #aaa !important; */
+    text-shadow: 0px 0px 16px lightcoral;
 }
 
-header {
-    background-color: #aaa;
-}
+
+header {}
 
 h1 {
+    font-family: 'Poor Story';
     position: absolute;
     width: 100%;
     top: 50%;
@@ -71,6 +83,7 @@ h1 {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
 
 h1::after {
     content: '';
@@ -102,11 +115,26 @@ header button {
     right: 10px;
     margin: 10px;
     opacity: 0.5;
+    font-family: 'Poor Story';
+    font-size: large;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    transition: all .5s ease-in-out;
 }
 
 header button:hover {
     opacity: 1;
     cursor: pointer;
+    animation-name: buttonColor;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes buttonColor {
+    to {
+        color: blueviolet;
+    }
 }
 
 main {}
@@ -245,6 +273,9 @@ section {}
     }
 }
 
+#PROJECT {
+    height: 800px;
+}
 
 
 .dis_b {
