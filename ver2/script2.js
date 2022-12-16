@@ -147,11 +147,38 @@ function skillHeight() {
 }
 Skill();
 
+//project 
+const projectList = [
+    {
+        name: '고양이 가라사대',
+        img: './projectImg/cat_jjal_maker/cat_jjal_site.png',
+        desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
+        skill: ['HTML', 'CSS', 'JavaScript', 'React'],
+        site: 'https://e-7281998.github.io/cat-jjal-maker/',
+        git: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
+    },
+    {
+        name: '고양이 가라사대2',
+        img: './projectImg/cat_jjal_maker/cat_jjal_site.png',
+        desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
+        skill: ['HTML', 'CSS', 'JavaScript', 'React'],
+        site: 'https://e-7281998.github.io/cat-jjal-maker/',
+        git: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
+    }
+]
+
+const sectionProject = createEl("section");
 function Project() {
     const h2 = createEl("h2");
     setId(h2, navList[2]);
     h2.innerText = 'project';
-    main.append(h2)
+    projectList.map((pj) => {
+        const pjDiv = createEl('div');
+        const pjName = createEl('p');
+        const pjImg = createEl('img');
+    })
+
+    main.append(h2);
 
 }
 Project();
@@ -171,7 +198,7 @@ window.addEventListener("scroll", () => {
 });
 
 //배경 색
-const bodyColor = ['#CDF0EA', '#F7DBF0', '#BEAEE2'];
+const bodyColor = ['#97E5FF', '#FFA0B7', '#8CCD90'];
 function navListHInfo(elPHT, elMTH, n) {
     return {
         "num": n,
@@ -205,8 +232,10 @@ function changeNavColor(num) {
     const navA = document.querySelectorAll('nav a');
     for (var i = 0; i < navA.length; i++) {
         if (i === num) {
+            classAdd(navA[i], 'active');
             navA[i].style.color = bodyColor[i];
         } else {
+            classRemove(navA[i], 'active');
             navA[i].style.color = '#ccc';
         }
     }
