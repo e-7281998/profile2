@@ -151,7 +151,7 @@ Skill();
 const projectList = [
     {
         name: '고양이 가라사대',
-        img: './projectImg/cat_jjal_maker/cat_jjal_site.png',
+        img: './projectImg/cat_jjal_site.png',
         desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
         site: 'https://e-7281998.github.io/cat-jjal-maker/',
@@ -159,7 +159,7 @@ const projectList = [
     },
     {
         name: '고양이 가라사대2',
-        img: './projectImg/cat_jjal_maker/cat_jjal_site.png',
+        img: './projectImg/cat_jjal_site.png',
         desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
         site: 'https://e-7281998.github.io/cat-jjal-maker/',
@@ -168,20 +168,45 @@ const projectList = [
 ]
 
 const sectionProject = createEl("section");
+setId(sectionProject, navList[2]);
 function Project() {
     const h2 = createEl("h2");
-    setId(h2, navList[2]);
+    h2.innerText = navList[2];
     h2.innerText = 'project';
+    const cardWrap = createEl("div");
+    classAdd(cardWrap, 'cardWrap');
     projectList.map((pj) => {
-        const pjDiv = createEl('div');
-        const pjName = createEl('p');
-        const pjImg = createEl('img');
-    })
+        const card = createEl("div");
+        classAdd(card, 'card');
 
-    main.append(h2);
+        const front = createEl("div");
+        classAdd(front, 'front');
+        front.innerText = '앞';
+        front.style = `background-image: url(${pj.img})`;
+
+        const back = createEl("div");
+        classAdd(back, 'back');
+        back.innerText = '뒤';
+
+        card.append(front, back);
+        cardWrap.append(card);
+    })
+    sectionProject.append(h2, cardWrap);
+    main.append(sectionProject);
 
 }
 Project();
+//project 높이
+function projectHeight() {
+    const pj = querySel('#PROJECT');
+    const pjHeight = pj.offsetHeight;
+    if (window.innerHeight > pjHeight) {
+        setHeight(pj);
+    } else {
+        pj.style.height = pjHeight + 'px';
+    }
+}
+projectHeight();
 
 //스크롤
 var prevScroll = 0;
@@ -248,5 +273,6 @@ changeBodyColor(0); //초기에는 스크롤값 구하지 않으므로(스크롤
 window.onresize = () => {
     headerHeight();
     skillHeight();
+    projectHeight();
     getHeightColor();
 }
