@@ -86,22 +86,22 @@ header.append(github, stopIntroBtn);
 const skillList = [
     {
         name: 'HTML',
-        img: './img/html.png',
+        img: './ver2/img/html.png',
         desc: ['시맨틱 태그 사용'],
     },
     {
         name: 'CSS',
-        img: './img/css.png',
+        img: './ver2/img/css.png',
         desc: ['flex 사용', 'animation 사용'],
     },
     {
         name: 'JavaScript',
-        img: './img/javascript.png',
+        img: './ver2/img/javascript.png',
         desc: ['ES6 사용'],
     },
     {
         name: 'React',
-        img: './img/react.png',
+        img: './ver2/img/react.png',
         desc: ['Hook 사용', 'react-router-dom 사용'],
     }
 ]
@@ -163,7 +163,7 @@ Skill();
 const projectList = [
     {
         name: '고양이 가라사대',
-        img: './projectImg/cat_jjal_site.png',
+        img: './ver2/projectImg/cat_jjal_site.png',
         desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
         site: 'https://e-7281998.github.io/cat-jjal-maker/',
@@ -171,7 +171,7 @@ const projectList = [
     },
     {
         name: '영화 정보 사이트',
-        img: './projectImg/react_movie_site.png',
+        img: './ver2/projectImg/react_movie_site.png',
         desc: 'API를 통해 받아온 영화 정보를 보여줍니다. 마우스 오버 시 줄거리를 볼 수 있으며, 제목 클릭시 영화 상세 정보를 볼 수 있습니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
         site: 'https://e-7281998.github.io/movie/',
@@ -179,7 +179,7 @@ const projectList = [
     },
     {
         name: '포트폴리오',
-        img: './projectImg/profile.png',
+        img: './ver2/projectImg/profile.png',
         desc: '개인 포트폴리오 사이트 입니다.',
         skill: ['HTML', 'CSS', 'JavaScript'],
         site: '#HOME',
