@@ -72,7 +72,15 @@ stopIntroBtn.onclick = () => {
     classAdd(stopIntroBtn, "dis_n");
     Intro();
 }
-header.append(stopIntroBtn);
+
+//github
+const github = createEl('a');
+github.setAttribute('href', 'https://github.com/e-7281998');
+github.setAttribute('target', '_blank');
+github.setAttribute('alt', 'github');
+classAdd(github, 'github');
+
+header.append(github, stopIntroBtn);
 
 //skill
 const skillList = [
@@ -84,17 +92,18 @@ const skillList = [
     {
         name: 'CSS',
         img: './img/css.png',
-        desc: ['flex 사용', 'animation 사용', 'flex 사용', 'flex 사용', 'flex 사용',],
+        desc: ['flex 사용', 'animation 사용'],
     },
     {
         name: 'JavaScript',
         img: './img/javascript.png',
-        desc: ['ES6 사용']
+        desc: ['ES6 사용'],
     },
     {
         name: 'React',
         img: './img/react.png',
-    },
+        desc: ['Hook 사용', 'react-router-dom 사용'],
+    }
 ]
 
 const sectionSkill = createEl("section");
@@ -139,6 +148,8 @@ function skillHeight() {
         subulH = Math.max(subulH, subul[i].offsetHeight);
     }
     subulH += h2.offsetHeight + titul.offsetHeight + subulH;
+    const minSubUlH = subulH + (titul.offsetHeight * 2);
+    subulH = Math.max(subulH, minSubUlH);
 
     if (window.innerHeight > subulH) {
         setHeight(sectionSkill);
@@ -159,12 +170,20 @@ const projectList = [
         code: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
     },
     {
-        name: '고양이 가라사대2',
-        img: './projectImg/cat_jjal_site.png',
-        desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
+        name: '영화 정보 사이트',
+        img: './projectImg/react_movie_site.png',
+        desc: 'API를 통해 받아온 영화 정보를 보여줍니다. 마우스 오버 시 줄거리를 볼 수 있으며, 제목 클릭시 영화 상세 정보를 볼 수 있습니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
-        site: 'https://e-7281998.github.io/cat-jjal-maker/',
-        code: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
+        site: 'https://e-7281998.github.io/movie/',
+        code: 'https://github.com/e-7281998/movie/tree/main/src',
+    },
+    {
+        name: '포트폴리오',
+        img: './projectImg/profile.png',
+        desc: '개인 포트폴리오 사이트 입니다.',
+        skill: ['HTML', 'CSS', 'JavaScript'],
+        site: '#HOME',
+        code: 'https://github.com/e-7281998/profile2',
     }
 ]
 const sectionProject = createEl("section");
@@ -197,8 +216,11 @@ function Project() {
         const link = createEl("div");
         const site = createEl("a");
         site.setAttribute("href", pj.site);
+        pj.site[0] === "#" ? '' : site.setAttribute("target", "_blank");
+
         const code = createEl("a");
         code.setAttribute("href", pj.code);
+        code.setAttribute("target", "_blank");
         link.append(site, code);
         back.append(desc, skill, link);
 
