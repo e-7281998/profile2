@@ -11,6 +11,7 @@ main,
 nav,
 section,
 footer,
+span,
 img {
     padding: 0;
     margin: 0;
@@ -89,8 +90,6 @@ nav a:not(.active):hover::after {
 }
 
 
-header {}
-
 h1 {
     font-family: 'Poor Story';
     position: absolute;
@@ -99,8 +98,8 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    line-height: 60px;
 }
-
 
 h1::after {
     content: '';
@@ -114,6 +113,47 @@ h1::after {
     animation-name: h1Cursor;
     animation-iteration-count: infinite;
 }
+
+h1 span {
+    display: inline-block;
+    position: relative;
+}
+
+h1 span::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    animation-delay: 0.4s;
+    animation-name: deco;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes deco {
+    0% {
+        content: '';
+    }
+
+    33.3333% {
+        content: '전';
+        text-shadow: 0px 0px 1rem #185f88;
+
+    }
+
+    66.6666% {
+        content: '전은';
+        text-shadow: 0px 0px 1rem #185f88;
+    }
+
+    100% {
+        content: '전은정';
+        text-shadow: 0px 0px 1rem #185f88;
+    }
+}
+
 
 @keyframes h1Cursor {
     from {
@@ -166,7 +206,8 @@ section {}
     position: relative;
 }
 
-#SKILL h2 {
+#SKILL h2,
+#PROJECT h2 {
     text-align: center;
 }
 
@@ -306,7 +347,7 @@ section {}
     width: 400px;
     height: 227px;
     perspective: 900px;
-    margin: 30px;
+    margin: 50px;
     box-sizing: border-box;
     position: relative;
 }
@@ -316,8 +357,9 @@ section {}
     height: 100%;
     backface-visibility: hidden;
     transition: 1.5s;
-    position: absolute;
     border-radius: 15px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 
@@ -325,6 +367,7 @@ section {}
 .front {
     transform: rotateY(0deg);
     background-size: cover;
+    position: absolute;
 }
 
 .card:hover .front {
@@ -334,12 +377,65 @@ section {}
 
 .back {
     transform: rotateY(-180deg);
-    background-color: darkgreen;
+    background-color: whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.back div {
+    width: 100%;
+}
+
+.back ul {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+
 }
 
 .card:hover .back {
     transform: rotateY(0deg);
     transition: 1.5s;
+}
+
+.back>div:last-child {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+
+}
+
+.back>div a {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    transition: all .3s ease-in-out;
+}
+
+.back>div a:first-child {
+    background-image: url(./img/site.png);
+}
+
+.back>div a:first-child:hover {
+    background-image: url(./img/site_hover.png);
+}
+
+.back>div a:last-child {
+    background-image: url(./img/code.png);
+}
+
+.back>div a:last-child:hover {
+    background-image: url(./img/code_hover.png);
+}
+
+.card>p {
+    padding: 15px 30px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .dis_b {

@@ -43,6 +43,7 @@ function Intro() {
         i++;
         if (introTxt.length === h1.innerText.length) {
             clearInterval(introTimer);
+            h1.innerHTML = h1.innerHTML.replace("전은정", "<span>전은정</span>");
             classRemove(stopIntroBtn, "dis_n");
         }
     }, 250);
@@ -155,7 +156,7 @@ const projectList = [
         desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
         site: 'https://e-7281998.github.io/cat-jjal-maker/',
-        git: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
+        code: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
     },
     {
         name: '고양이 가라사대2',
@@ -163,16 +164,14 @@ const projectList = [
         desc: '영어 문구를 입력하면 해당 문구가 입력된 고양이 사진을 랜덤으로 받아옵니다. 사진 위 하트를 클릭하면 로컬 스토리지에 저장됩니다.',
         skill: ['HTML', 'CSS', 'JavaScript', 'React'],
         site: 'https://e-7281998.github.io/cat-jjal-maker/',
-        git: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
+        code: 'https://github.com/e-7281998/cat-jjal-maker/tree/main/cat-jjal-maker-cra',
     }
 ]
-
 const sectionProject = createEl("section");
 setId(sectionProject, navList[2]);
 function Project() {
     const h2 = createEl("h2");
     h2.innerText = navList[2];
-    h2.innerText = 'project';
     const cardWrap = createEl("div");
     classAdd(cardWrap, 'cardWrap');
     projectList.map((pj) => {
@@ -181,32 +180,53 @@ function Project() {
 
         const front = createEl("div");
         classAdd(front, 'front');
-        front.innerText = '앞';
         front.style = `background-image: url(${pj.img})`;
 
         const back = createEl("div");
         classAdd(back, 'back');
-        back.innerText = '뒤';
+        const desc = createEl('p');
+        desc.innerText = pj.desc;
 
-        card.append(front, back);
+        const skill = createEl('ul');
+        pj.skill.map((sk) => {
+            const li = createEl('li');
+            li.innerText = sk;
+            skill.append(li);
+        });
+
+        const link = createEl("div");
+        const site = createEl("a");
+        site.setAttribute("href", pj.site);
+        const code = createEl("a");
+        code.setAttribute("href", pj.code);
+        link.append(site, code);
+        back.append(desc, skill, link);
+
+        const p = createEl("p");
+        p.innerText = pj.name;
+
+        card.append(front, back, p);
         cardWrap.append(card);
     })
     sectionProject.append(h2, cardWrap);
     main.append(sectionProject);
 
+    projectHeight();
 }
 Project();
 //project 높이
 function projectHeight() {
     const pj = querySel('#PROJECT');
-    const pjHeight = pj.offsetHeight;
+    const wrap = querySel('.cardWrap');
+    const h2 = document.querySelectorAll('#PROJECT h2')[0];
+    const pjHeight = wrap.offsetHeight + h2.offsetHeight;
+
     if (window.innerHeight > pjHeight) {
         setHeight(pj);
     } else {
         pj.style.height = pjHeight + 'px';
     }
 }
-projectHeight();
 
 //스크롤
 var prevScroll = 0;
