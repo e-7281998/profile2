@@ -178,6 +178,14 @@ const projectList = [
         code: 'https://github.com/e-7281998/movie/tree/main/src',
     },
     {
+        name: '운동 기록 사이트',
+        img: './ver2/projectImg/exercise_record_site.png',
+        desc: '*미완성* 운동 목표를 세우고, 기록하는 사이트 입니다. 모든 정보는 로컬 스토리지에 저장됩니다. 개인정보는 최초 접속시에만 이루어지며, 수정이 가능합니다.',
+        skill: ['HTML', 'styled-components', 'JavaScript', 'React'],
+        site: 'https://lw6rnu-3000.preview.csb.app',
+        code: 'https://github.com/e-7281998/exercise-record',
+    },
+    {
         name: '포트폴리오',
         img: './ver2/projectImg/profile.png',
         desc: '개인 포트폴리오 사이트 입니다.',
